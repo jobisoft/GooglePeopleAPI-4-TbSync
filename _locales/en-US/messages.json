@@ -1,15 +1,15 @@
 {
     "menu.name": {
-        "message": "EteSync"
+        "message": "Goolge People API"
     },
     "add.title": {
-        "message": "Adding a EteSync account to TbSync"
+        "message": "Adding a Google account to TbSync"
     },
     "extensionDescription": {
-        "message": "Add sync support for EteSync accounts to TbSync (contacts, tasks and calendars)."
+        "message": "Add sync support for Google accounts (using Google's People API) to TbSync (contacts, tasks and calendars)."
     },
     "extensionName": {
-        "message": "Provider for EteSync"
+        "message": "Provider for Google"
     },
     "manager.tabs.accountsettings": {
         "message": "Account settings"

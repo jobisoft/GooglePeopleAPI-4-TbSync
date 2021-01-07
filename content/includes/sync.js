@@ -1,5 +1,5 @@
 /*
- * This file is part of ETESYNC-4-TbSync.
+ * This file is part of GOOGLE-4-TbSync.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -41,13 +41,13 @@ var sync = {
                 break;
 
             default:
-                console.log(" ETESYNC-4-TbSync: Unknown status <"+aStatus+">");
+                console.log(" GOOGLE-4-TbSync: Unknown status <"+aStatus+">");
                 status = TbSync.StatusData.ERROR;
                 break;
         }
         
         let e = new Error(); 
-        e.name = "etesync4tbsync";
+        e.name = "google4tbsync";
         e.message = status.toUpperCase() + ": " + msg.toString() + " (" + details.toString() + ")";
         e.statusData = new TbSync.StatusData(status, msg.toString(), details.toString());        
         return e; 
@@ -94,7 +94,7 @@ var sync = {
             syncData.target = await syncData.currentFolderData.targetData.getTarget();
         } catch (e) {
             Components.utils.reportError(e);        
-            throw etesync.sync.finish("warning", e.message);
+            throw google.sync.finish("warning", e.message);
         }
 
         syncData.setSyncState("preparing");
@@ -111,7 +111,7 @@ var sync = {
             }
         } catch (e) {
             Components.utils.reportError(e);        
-            throw etesync.sync.finish("warning", e.message);
+            throw google.sync.finish("warning", e.message);
         }
     },
 

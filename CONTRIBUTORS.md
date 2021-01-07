@@ -1,5 +1,5 @@
 ## Creator
-* John Bieling
+* Marco Zanon
 
 ## Contributors
 * ...

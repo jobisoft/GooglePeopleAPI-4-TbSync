@@ -1,5 +1,5 @@
 /*
- * This file is part of ETESYNC-4-TbSync.
+ * This file is part of GOOGLE-4-TbSync.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,8 +10,8 @@
 
 var { MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm");
 
-// Every Object in here will be loaded into the following namespace: TbSync.providers.etesync. 
-const etesync = TbSync.providers.etesync;
+// Every Object in here will be loaded into the following namespace: TbSync.providers.google. 
+const google = TbSync.providers.google;
 
 /**
  * Base class for the TbSync provider interface.
@@ -23,7 +23,7 @@ var Base = class {
      */
     static async load() {
       // Set default prefs
-      let branch = Services.prefs.getDefaultBranch("extensions.etesync4tbsync.");
+      let branch = Services.prefs.getDefaultBranch("extensions.google4tbsync.");
       branch.setIntPref("timeout", 50);
       branch.setCharPref("someCharPref", "Test");
       branch.setBoolPref("someBoolPref", true);    
@@ -48,7 +48,7 @@ var Base = class {
      *
      */
     static getProviderName() {
-        return TbSync.getString("menu.name", "etesync");
+        return TbSync.getString("menu.name", "google");
     }
 
 
@@ -77,11 +77,11 @@ var Base = class {
     static getProviderIcon(size, accountData = null) {
         switch (size) {
             case 16:
-                return "resource://etesync4tbsync/skin/icon16.png";
+                return "resource://google4tbsync/skin/icon16.png";
             case 32:
-                return "resource://etesync4tbsync/skin/icon32.png";
+                return "resource://google4tbsync/skin/icon32.png";
             default :
-                return "resource://etesync4tbsync/skin/icon64.png";
+                return "resource://google4tbsync/skin/icon64.png";
         }
     }
 
@@ -119,7 +119,7 @@ var Base = class {
      *
      */
     static getContributorsUrl() {
-        return "https://github.com/jobisoft/EteSync-4-TbSync/blob/master/CONTRIBUTORS.md";
+        return "https://github.com/zanonmark/GOOGLE-4-TbSync/blob/master/CONTRIBUTORS.md";
     }
 
 
@@ -131,7 +131,7 @@ var Base = class {
      *
      */
     static getMaintainerEmail() {
-        return "john.bieling@gmx.de";
+        return "info@marcozanon.com";
     }
 
 
@@ -148,7 +148,7 @@ var Base = class {
      *
      */
     static getCreateAccountWindowUrl() {
-        return "chrome://etesync4tbsync/content/manager/createAccount.xhtml";
+        return "chrome://google4tbsync/content/manager/createAccount.xhtml";
     }
 
 
@@ -169,7 +169,7 @@ var Base = class {
      *
      */
     static getEditAccountOverlayUrl() {
-        return "chrome://etesync4tbsync/content/manager/editAccountOverlay.xhtml";
+        return "chrome://google4tbsync/content/manager/editAccountOverlay.xhtml";
     }
 
 
@@ -333,7 +333,7 @@ var Base = class {
      *
      */
     static getConnectionTimeout(accountData) {
-        return Services.prefs.getBranch("extensions.etesync4tbsync.").getIntPref("timeout");
+        return Services.prefs.getBranch("extensions.google4tbsync.").getIntPref("timeout");
     }
     
 
@@ -359,9 +359,9 @@ var Base = class {
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
         try {
-            await etesync.sync.folderList(syncData);
+            await google.sync.folderList(syncData);
         } catch (e) {
-            if (e.name == "etesync4tbsync") {
+            if (e.name == "google4tbsync") {
                 return e.statusData;
             } else {
                 Components.utils.reportError(e);
@@ -397,9 +397,9 @@ var Base = class {
      */
     static async syncFolder(syncData, syncJob, syncRunNr) {
         try {
-            await etesync.sync.singleFolder(syncData);
+            await google.sync.singleFolder(syncData);
         } catch (e) {
-            if (e.name == "etesync4tbsync") {
+            if (e.name == "google4tbsync") {
                 return e.statusData;
             } else {
                 Components.utils.reportError(e);
@@ -435,7 +435,7 @@ var TargetData = class {
      */
     hasTarget() {
         let target = this._folderData.getFolderProperty("targetID");
-        let directory = etesync.addressbook.getDirectoryFromDirectoryUID(target);
+        let directory = google.addressbook.getDirectoryFromDirectoryUID(target);
      
         if (directory !== null && directory instanceof Components.interfaces.nsIAbDirectory) {
             return true;
@@ -462,7 +462,7 @@ var TargetData = class {
      */
     async getTarget() { 
         let target = this._folderData.getFolderProperty("targetID");
-        let directory = etesync.addressbook.getDirectoryFromDirectoryUID(target);
+        let directory = google.addressbook.getDirectoryFromDirectoryUID(target);
       
         if (!directory) {
             let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("foldername"), "", 2);
@@ -484,7 +484,7 @@ var TargetData = class {
      */
     removeTarget() {
         let target = this._folderData.getFolderProperty("targetID");
-        let directory = etesync.addressbook.getDirectoryFromDirectoryUID(target);
+        let directory = google.addressbook.getDirectoryFromDirectoryUID(target);
         try {
             if (directory) {
                 MailServices.ab.deleteAddressBook(directory.URI);
@@ -510,14 +510,14 @@ var TargetData = class {
      */
     set targetName(newName) {
         let target = this._folderData.getFolderProperty("targetID");
-        let directory = etesync.addressbook.getDirectoryFromDirectoryUID(target);
+        let directory = google.addressbook.getDirectoryFromDirectoryUID(target);
         if (directory && newName) {
             directory.dirName = newName;
         }     
     }
     get targetName() {
         let target = this._folderData.getFolderProperty("targetID");
-        let directory = etesync.addressbook.getDirectoryFromDirectoryUID(target);
+        let directory = google.addressbook.getDirectoryFromDirectoryUID(target);
         if (directory) {
             return directory.dirName;
         }
@@ -583,6 +583,8 @@ var StandardFolderList = class {
                 return "chrome://tbsync/skin/contacts16.png";
             case "calendar":
                 return "chrome://tbsync/skin/calendar16.png";
+            case "todo":
+                return "chrome://tbsync/skin/todo16.png";
         }
     }
     
@@ -664,5 +666,5 @@ var StandardFolderList = class {
     }
 }
 
-Services.scriptloader.loadSubScript("chrome://etesync4tbsync/content/includes/sync.js", this, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://etesync4tbsync/content/includes/addressbook.js", this, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://google4tbsync/content/includes/sync.js", this, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://google4tbsync/content/includes/addressbook.js", this, "UTF-8");

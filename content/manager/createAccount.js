@@ -1,5 +1,5 @@
 /*
- * This file is part of ETESYNC-4-TbSync.
+ * This file is part of GOOGLE-4-TbSync.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,7 +10,7 @@
 
 var { TbSync } = ChromeUtils.import("chrome://tbsync/content/tbsync.jsm");
 
-const etesync = TbSync.providers.etesync;
+const google = TbSync.providers.google;
 
 var tbSyncNewAccount = {
 
@@ -19,7 +19,7 @@ var tbSyncNewAccount = {
     },
 
     onLoad: function () {
-        this.providerData = new TbSync.ProviderData("etesync");
+        this.providerData = new TbSync.ProviderData("google");
 
         this.elementName = document.getElementById('tbsync.newaccount.name');
         this.elementUser = document.getElementById('tbsync.newaccount.user');

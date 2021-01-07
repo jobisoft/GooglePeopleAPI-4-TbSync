@@ -1,9 +1,9 @@
 async function main() {
   await messenger.BootstrapLoader.registerChromeUrl([ 
-    ["content", "etesync4tbsync", "content/"],
-    ["resource", "etesync4tbsync", "."],
+    ["content", "google4tbsync", "content/"],
+    ["resource", "google4tbsync", "."],
   ]);
-  await messenger.BootstrapLoader.registerBootstrapScript("chrome://etesync4tbsync/content/bootstrap.js");  
+  await messenger.BootstrapLoader.registerBootstrapScript("chrome://google4tbsync/content/bootstrap.js");  
 }
 
 main();

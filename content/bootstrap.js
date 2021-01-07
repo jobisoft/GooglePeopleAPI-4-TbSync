@@ -1,5 +1,5 @@
 /*
- * This file is part of ETESYNC-4-TbSync.
+ * This file is part of GOOGLE-4-TbSync.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,7 +22,7 @@ let onInitDoneObserver = {
         
         //load this provider add-on into TbSync
         if (valid) {
-            await TbSync.providers.loadProvider(extension, "etesync", "chrome://etesync4tbsync/content/provider.js");
+            await TbSync.providers.loadProvider(extension, "google", "chrome://google4tbsync/content/provider.js");
         }
     }
 }
@@ -54,7 +54,7 @@ function shutdown(data, reason) {
     //unload this provider add-on from TbSync
     try {
         var { TbSync } = ChromeUtils.import("chrome://tbsync/content/tbsync.jsm");
-        TbSync.providers.unloadProvider("etesync");
+        TbSync.providers.unloadProvider("google");
     } catch (e) {
         //if this fails, TbSync has been unloaded already and has unloaded this addon as well
     }
